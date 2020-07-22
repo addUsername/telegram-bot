@@ -21,6 +21,8 @@ Connecting Telegram log chat to MySql using Docker. Automatically save chat hist
   cd app
   python3 Main.py
   ```
+  
+You finish here, add your bot to your favourite group chat and enjoy.
 ## Build down
 ``` Bash
   docker-compose down
