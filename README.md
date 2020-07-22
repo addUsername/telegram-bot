@@ -17,9 +17,9 @@ How make it works:
 - Open command shell (cmd on win, sh on linux)
 - go to repo directory
 - write:
-  docker-compose build up -d
+  docker-compose up -d
   docker exec -it XXX_python_1
-  cd new/app
+  cd app
   python3 Main.py
   
 How to use it:
