@@ -1,0 +1,39 @@
+version: '3.3'
+services:
+  mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'bot'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: '123'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - mybot:/var/lib/mysql
+      - ./mydb:/docker-entrypoint-initdb.d
+    networks: 
+      - network
+  
+  python:    
+    restart: always
+    build: .
+    environment:
+      MYSQL_DATABASE: 'bot'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: '123'
+      MYSQL_ROOT_PASSWORD: 'root'
+    volumes:
+      - mybot:/usr/app
+    command: tail -f /dev/null
+    networks: 
+      - network
+
+networks:
+  network:
+    driver: bridge
+volumes:
+  mybot:
