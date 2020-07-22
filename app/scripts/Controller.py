@@ -52,21 +52,28 @@ class Controller:
         self.mysql_connection.updateTable(params)
         
     def showStats(self, update, context):
-        print("showstats")
         try:
             params = context.args[0]
-            print("params:" + str(params))
             mssg = self.mysql_connection.showStats(params)
             update.message.reply_text(mssg)
         except:
-            print("except")
             update.message.reply_text('user not found')
+      
+    def maths(self, update, context):
+        try:
+            params = ""
+            for i in context.args:
+                params += str(i)
+            update.message.reply_text(eval(params))
+        except:
+            update.message.reply_text('syntax error')
         
     def run(self):
         
         updater = Updater(self.token, use_context=True)
         dp = updater.dispatcher
         
+        dp.add_handler(CommandHandler("do", self.maths))
         dp.add_handler(CommandHandler("report", self.report))
         dp.add_handler(CommandHandler("numReports", self.getReports))
         dp.add_handler(CommandHandler("num", self.showStats))

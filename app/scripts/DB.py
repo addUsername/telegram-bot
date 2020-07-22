@@ -4,10 +4,8 @@ Created on Fri Jul 17 23:44:40 2020
 
 @author: SERGI
 """
-import mysql.connector
+import pymysql
 import time
-
-
 class DB:
 
     def __init__(self, params):
@@ -18,12 +16,12 @@ class DB:
 
         '''
         print("Connecting to mysql..")
-        print("host "+params["host"] +"user: "+params["user"]+" pass:"+params["pass"]+" db:"+params["database"])
         time.sleep(1)
-        self.mydb = mysql.connector.connect(host=params["host"],
+        self.mydb = pymysql.connect(host=params["host"],
                                             user=params["user"],
                                             password=params["pass"],
                                             database=params["database"])
+        print("connected")
     def addReports(self, params, num_reports):
         cursor = self.mydb.cursor()
         if(num_reports == 0):
